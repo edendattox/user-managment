@@ -23,18 +23,15 @@ const handlebars = exphbs.create({ extname: ".hbs" });
 app.engine(".hbs", handlebars.engine);
 app.set("view engine", ".hbs");
 
-// const routes = require("./server/routes/user");
+const routes = require("./server/routes/user");
 
-// app.use("/", routes);
-
-app.get("", (req, res) => {
-  res.render("home");
-});
+app.use("/", routes);
 
 const pool = mysql.createPool({
   connectionLimit: 100,
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
+  port: process.env.DB_PORT,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
 });
